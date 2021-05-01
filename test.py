@@ -300,21 +300,21 @@ import os
 from render import *
 
 dot_full_graph = FullGraphDotRenderer(g).render()
-png_file = ImageFileRenderer(dot_full_graph).render(path_prefix="test-full.dot")
+png_file = DotImageFileRenderer(dot_full_graph).render(path_prefix="test-full.dot")
 assert png_file == "test-full.dot.jpg"
 assert os.path.exists(png_file)
 
 dot_word_cloud_graph = WordCloudDotRenderer(g).render()
-png_file = ImageFileRenderer(dot_word_cloud_graph).render(path_prefix="test-word-cloud.dot")
+png_file = DotImageFileRenderer(dot_word_cloud_graph).render(path_prefix="test-word-cloud.dot")
 assert png_file == "test-word-cloud.dot.jpg"
 assert os.path.exists(png_file)
 
 dot_graph_sub_people = SubGraphDotRenderer(people_subgraph).render()
-png_file = ImageFileRenderer(dot_graph_sub_people).render(path_prefix="test-sub-people.dot")
+png_file = DotImageFileRenderer(dot_graph_sub_people).render(path_prefix="test-sub-people.dot")
 assert png_file == "test-sub-people.dot.jpg"
 assert os.path.exists(png_file)
 
 dot_graph_sub_skills = SubGraphDotRenderer(skills_subgraph).render()
-png_file = ImageFileRenderer(dot_graph_sub_skills).render(path_prefix="test-sub-skills.dot")
+png_file = DotImageFileRenderer(dot_graph_sub_skills).render(path_prefix="test-sub-skills.dot")
 assert png_file == "test-sub-skills.dot.jpg"
 assert os.path.exists(png_file)

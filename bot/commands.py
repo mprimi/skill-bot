@@ -102,9 +102,9 @@ class DrawFullGraphCommand(AbstractCommand):
         super(DrawFullGraphCommand, self).__init__(message)
 
     async def execute(self, client):
-        from render import ImageFileRenderer, FullGraphDotRenderer
+        from render import DotImageFileRenderer, FullGraphDotRenderer
         dot_graph = FullGraphDotRenderer(client.get_graph_snapshot()).render()
-        png_file = ImageFileRenderer(dot_graph).render()
+        png_file = DotImageFileRenderer(dot_graph).render()
 
         m = await self.message.channel.send(
             embed=messages.FULL_GRAPH,
@@ -122,9 +122,9 @@ class DrawWordCloudCommand(AbstractCommand):
         super(DrawWordCloudCommand, self).__init__(message)
 
     async def execute(self, client):
-        from render import ImageFileRenderer, WordCloudDotRenderer
+        from render import DotImageFileRenderer, WordCloudDotRenderer
         dot_graph = WordCloudDotRenderer(client.get_graph_snapshot()).render()
-        png_file = ImageFileRenderer(dot_graph).render()
+        png_file = DotImageFileRenderer(dot_graph).render()
 
         m = await self.message.channel.send(
             embed=messages.WORD_CLOUD_GRAPH,
@@ -149,9 +149,9 @@ class DrawPeopleSubgraphCommand(AbstractCommand):
         self.people_ids = [int(m) for m in mentions]
 
     async def execute(self, client):
-        from render import ImageFileRenderer, SubGraphDotRenderer
+        from render import DotImageFileRenderer, SubGraphDotRenderer
         dot_graph = SubGraphDotRenderer(client.get_people_subgraph_snapshot(self.people_ids)).render()
-        png_file = ImageFileRenderer(dot_graph).render()
+        png_file = DotImageFileRenderer(dot_graph).render()
 
         m = await self.message.channel.send(
             embed=messages.people_subgraph_message(self.people_ids),
@@ -177,9 +177,9 @@ class DrawSkillsSubgraphCommand(AbstractCommand):
 
     async def execute(self, client):
         skill_ids = client.search_skills(self.terms)
-        from render import ImageFileRenderer, SubGraphDotRenderer
+        from render import DotImageFileRenderer, SubGraphDotRenderer
         dot_graph = SubGraphDotRenderer(client.get_skills_subgraph_snapshot(skill_ids)).render()
-        png_file = ImageFileRenderer(dot_graph).render()
+        png_file = DotImageFileRenderer(dot_graph).render()
 
         m = await self.message.channel.send(
             embed=messages.skills_subgraph_message(self.terms),

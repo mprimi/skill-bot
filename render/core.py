@@ -99,11 +99,11 @@ class WordCloudDotRenderer(object):
             # print(f'{skill.name}: {len(skill.people)} (max: {max_people}) -> {normalized} -> {font_size}')
         return font_sizes_map
 
-class ImageFileRenderer(object):
+class DotImageFileRenderer(object):
     """Renders a graph into an image file"""
 
     def __init__(self, dot_graph: Dot):
-        super(ImageFileRenderer, self).__init__()
+        super(DotImageFileRenderer, self).__init__()
         self.dot_graph = dot_graph
 
     def render(self, path_prefix: str = './graph.dot', image_format: str = 'jpg'):
