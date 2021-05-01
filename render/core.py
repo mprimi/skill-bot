@@ -1,3 +1,4 @@
+import json
 from graphviz import Digraph, Graph
 from graphviz.dot import Dot
 import model
@@ -108,3 +109,28 @@ class DotImageFileRenderer(object):
 
     def render(self, path_prefix: str = './graph.dot', image_format: str = 'jpg'):
         return self.dot_graph.render(format=image_format, filename=path_prefix, view=False)
+
+class FullGraphG6JsonRenderer(object):
+    """Renders the full graph into a JSON object ready for display with G6"""
+
+    def __init__(self, graph: model.Graph):
+        super(FullGraphG6JsonRenderer, self).__init__()
+        self.graph = graph
+
+    def render(self) -> dict:
+        people_nodes = [{'id': str(p.id), 'label': p.name, 'type': 'ellipse'} for p in self.graph.people.values()]
+        skill_nodes = [{'id': str(s.id), 'label': s.name, 'type': 'rect'} for s in self.graph.skills.values()]
+        edges = [{'source': str(p.id), 'target': str(s.id)} for p, s in self.graph.people_skills]
+        return {'nodes': people_nodes + skill_nodes, 'edges': edges}
+
+class JsonFileRenderer(object):
+    """Renders a JSON graph object into a file"""
+
+    def __init__(self, json_graph: dict):
+        super(JsonFileRenderer, self).__init__()
+        self.json_graph = json_graph
+
+    def render(self, path: str = './graph.json', indent: int = 2):
+        with open(path, "w") as outfile:
+            json.dump(self.json_graph, outfile, indent=indent)
+        return path
