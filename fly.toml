@@ -1,0 +1,17 @@
+# fly.toml file generated for skill-bot-marcos-island-dev on 2021-08-15T15:59:36-07:00
+
+app = "skill-bot-marcos-island-dev"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[build]
+  builtin = "python"
+
+[build.settings]
+  pythonbase = "3.9-slim-buster"
+
+[env]
+  GUILD_ID = 745693123505553458
+  MONITOR_CHANNEL_ID = 876600427158859816
+  CUSTOMIZATION = 'raidguild'
