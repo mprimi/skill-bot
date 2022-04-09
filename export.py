@@ -46,16 +46,16 @@ for input_file in input_files:
     with open(js_output_file, 'w') as f:
         f.write('var people = [\n')
         for p in gs.people.values():
-            f.write('    {id: "p-'+str(p.id)+'", name: "'+p.name+'"}\n')
+            f.write('    {id: "p-'+str(p.id)+'", name: "'+p.name+'"},\n')
         f.write(']\n')
         f.write('\n')
         f.write('var skills = [\n')
         for s in gs.skills.values():
-            f.write('    {id: "s-'+str(s.id)+'", name: "'+s.name+'"}\n')
+            f.write('    {id: "s-'+str(s.id)+'", name: "'+s.name+'"},\n')
         f.write(']\n')
         f.write('\n')
         f.write('var people_skills = [\n')
         for ps in gs.people_skills:
-            f.write('    {person: "p-'+str(ps[0].id)+'", skill: "'+str(ps[1].id)+'"}\n')
+            f.write('    {person: "p-'+str(ps[0].id)+'", skill: "s-'+str(ps[1].id)+'"},\n')
         f.write(']\n')
         f.write('\n')
