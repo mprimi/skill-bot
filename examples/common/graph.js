@@ -82,6 +82,9 @@ async function force_graph() {
     .force('repulsion', d3.forceCollide(105))
     .force('center', d3.forceCenter($.width / 2, $.height / 2))
 
+  simulation.stop()
+
+
     // simulation.stop()
 
   simulation.nodes($.nodes).on('tick', tick)
@@ -126,6 +129,9 @@ async function force_graph() {
       .attr('dx', node => (node.type == "skill" ? skillNodeSize : personNodeSize ))
       .attr('dy', node => (node.type == "skill" ? -skillNodeSize : -personNodeSize ))
       .attr('class', node => "label " + node.type + "-label")
+
+  simulation.alpha(0.25)
+  simulation.restart()
 
   d3.select('#d3-canary')
     .text("✅ ");
